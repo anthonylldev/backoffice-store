@@ -13,7 +13,9 @@
     <td><img class="imageCategory" [src]="'data:image/jpeg;base64,' + category.image" alt="category image"></td>
     <td>{{ category.name }}</td>
     <td>
-      <button id="btnNavToCategoryItems">Items</button>
+      <a [routerLink]="['/categories', category.id, 'items']">
+        <button id="btnNavToCategoryItems">Items</button>
+      </a>
       <button id="btnEditCategory">Editar</button>
       <button id="btnDeleteCategory">Eliminar</button>
     </td>
