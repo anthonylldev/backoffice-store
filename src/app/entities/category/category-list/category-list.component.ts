@@ -26,4 +26,8 @@ export class CategoryListComponent implements OnInit {
   private handleError(err: any): void {
     console.log(err)
   }
+
+  categoriesIsLoaded() {
+    return this.categories.length > 0;
+  }
 }

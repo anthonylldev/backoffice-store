@@ -10,7 +10,8 @@ import { CategoryListComponent } from './entities/category/category-list/categor
 import { CategoryFormComponent } from './entities/category/category-form/category-form.component';
 import { ItemListComponent } from './entities/item/item-list/item-list.component';
 import { ItemFormComponent } from './entities/item/item-form/item-form.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpRequestInterceptor} from "./config/interceptors/http-request.interceptor";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,13 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
