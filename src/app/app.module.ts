@@ -10,6 +10,7 @@ import { CategoryListComponent } from './entities/category/category-list/categor
 import { CategoryFormComponent } from './entities/category/category-form/category-form.component';
 import { ItemListComponent } from './entities/item/item-list/item-list.component';
 import { ItemFormComponent } from './entities/item/item-form/item-form.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ItemFormComponent } from './entities/item/item-form/item-form.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
