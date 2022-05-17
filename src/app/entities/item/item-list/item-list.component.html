@@ -1,1 +1,23 @@
 <h1>{{ title }}</h1>
+
+<table *ngIf="itemsIsLoaded()">
+  <thead>
+  <th>Id</th>
+  <th>Imagen</th>
+  <th>Artículo</th>
+  <th>Precio</th>
+  <th>Acciones</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td>{{ item.id }}</td>
+    <td><img class="imageItem" [src]="'data:image/jpeg;base64,' + item.image" alt="item image"></td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.price }}</td>
+    <td>
+      <button id="btnEditItem">Editar</button>
+      <button id="btnDeleteItem">Eliminar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
