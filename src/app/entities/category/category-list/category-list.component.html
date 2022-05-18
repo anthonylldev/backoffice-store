@@ -1,24 +1,27 @@
 <h1>Lista de categorías</h1>
 
-<table *ngIf="categoriesIsLoaded()">
-  <thead>
-  <th>Id</th>
-  <th>Imagen</th>
-  <th>Categoría</th>
-  <th>Acciones</th>
-  </thead>
-  <tbody>
-  <tr *ngFor="let category of categories">
-    <td>{{ category.id }}</td>
-    <td><img class="imageCategory" [src]="'data:image/jpeg;base64,' + category.image" alt="category image"></td>
-    <td>{{ category.name }}</td>
-    <td>
-      <a [routerLink]="['/categories', category.id, 'items']">
-        <button id="btnNavToCategoryItems">Items</button>
-      </a>
-      <button id="btnEditCategory">Editar</button>
-      <button id="btnDeleteCategory">Eliminar</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container">
+  <table class="table" *ngIf="categoriesIsLoaded()">
+    <thead class="table-dark">
+    <tr>
+      <th>Id</th>
+      <th>Imagen</th>
+      <th>Categoría</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{ category.id }}</td>
+      <td><img class="imageCategory" [src]="'data:image/jpeg;base64,' + category.image" alt="category image"></td>
+      <td>{{ category.name }}</td>
+      <td class="actions">
+        <a [routerLink]="['/categories', category.id, 'items']"><button id="btnNavToCategoryItems">Items</button></a>
+        <button id="btnEditCategory">Editar</button>
+        <button id="btnDeleteCategory">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

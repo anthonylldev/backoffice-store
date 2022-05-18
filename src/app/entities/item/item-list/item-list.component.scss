@@ -1,3 +1,31 @@
-.imageItem {
-  width: 80px;
+.table {
+
+  thead {
+    th {
+      &:last-child {
+        text-align: center
+      }
+    }
+  }
+
+  tbody {
+    .imageItem {
+      width: 80px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.paginationButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    margin: 0 20px;
+  }
 }

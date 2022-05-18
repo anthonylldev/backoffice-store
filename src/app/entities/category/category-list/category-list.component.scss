@@ -1,3 +1,28 @@
-.imageCategory {
-  width: 80px;
+.table {
+  thead {
+    th {
+      &:last-child {
+        text-align: center
+      }
+    }
+  }
+
+  tbody {
+
+    .imageCategory {
+      width: 80px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        width: 100%;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

@@ -1,29 +1,36 @@
 <h1>{{ title }}</h1>
 
-<table *ngIf="itemsIsLoaded()">
-  <thead>
-  <th>Id</th>
-  <th>Imagen</th>
-  <th>Artículo</th>
-  <th>Precio</th>
-  <th>Acciones</th>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of items">
-    <td>{{ item.id }}</td>
-    <td><img class="imageItem" [src]="'data:image/jpeg;base64,' + item.image" alt="item image"></td>
-    <td>{{ item.name }}</td>
-    <td>{{ item.price }}</td>
-    <td>
-      <button id="btnEditItem">Editar</button>
-      <button id="btnDeleteItem">Eliminar</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container">
+  <table class="table" *ngIf="itemsIsLoaded()">
+    <thead class="table-dark">
+    <tr>
+      <th>Id</th>
+      <th>Imagen</th>
+      <th>Artículo</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.id }}</td>
+      <td><img class="imageItem" [src]="'data:image/jpeg;base64,' + item.image" alt="item image"></td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.price }}</td>
+      <td class="actions">
+        <button id="btnEditItem">Editar</button>
+        <button id="btnDeleteItem">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
-<div class="paginationButtons">
+<div class="container paginationButtons">
   <button [disabled]="first" class="btn btn-secondary btn-previous" (click)="previousPage()">Anterior</button>
   <span>Página {{ page + 1}} de {{ totalPages }} - Elementos totales: {{ totalElements }}</span>
   <button [disabled]="last" class="btn btn-secondary btn-next" (click)="nextPage()">Siguiente</button>
 </div>
+
+
+
