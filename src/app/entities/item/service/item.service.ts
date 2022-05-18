@@ -23,4 +23,9 @@ export class ItemService {
     const urlEndPoint: string = `http://localhost:8080/store/items/${itemToDelete}`
     return this.http.delete<any>(urlEndPoint);
   }
+
+  public getItemById(itemId: number): Observable<Item> {
+    const urlEndPoint: string = `http://localhost:8080/store/items/${itemId}`
+    return this.http.get<Item>(urlEndPoint);
+  }
 }
