@@ -21,3 +21,9 @@
   </tr>
   </tbody>
 </table>
+
+<div class="paginationButtons">
+  <button [disabled]="first" class="btn btn-secondary btn-previous" (click)="previousPage()">Anterior</button>
+  <span>Página {{ page + 1}} de {{ totalPages }} - Elementos totales: {{ totalElements }}</span>
+  <button [disabled]="last" class="btn btn-secondary btn-next" (click)="nextPage()">Siguiente</button>
+</div>
