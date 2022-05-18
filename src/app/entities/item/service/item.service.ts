@@ -18,4 +18,9 @@ export class ItemService {
     }
     return this.http.get<Item[]>(urlEndPoint);
   }
+
+  public deleteItem(itemToDelete: number): Observable<any> {
+    const urlEndPoint: string = `http://localhost:8080/store/items/${itemToDelete}`
+    return this.http.delete<any>(urlEndPoint);
+  }
 }

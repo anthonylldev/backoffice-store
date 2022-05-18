@@ -25,6 +25,8 @@ export class ItemListComponent implements OnInit {
   nameFilter?: string;
   priceFilter?: number;
 
+  private itemToDelete?: number;
+
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService
@@ -106,6 +108,19 @@ export class ItemListComponent implements OnInit {
 
     } else {
       return undefined;
+    }
+  }
+
+  prepareItemToDelete(itemId: number): void {
+    this.itemToDelete = itemId;
+  }
+
+  deleteItem(): void {
+    if (this.itemToDelete) {
+      this.itemService.deleteItem(this.itemToDelete).subscribe({
+        next: (data) => { this.getAllItems() },
+        error: (err) => { this.handleError(err) }
+      });
     }
   }
 }
