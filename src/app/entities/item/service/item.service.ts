@@ -11,8 +11,11 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
 
-  public getAllItems(page: number, size: number, sort: string): Observable<Item[]> {
-    const urlEndPoint: string = `http://localhost:8080/store/items?page=${page}&size=${size}&sort=${sort}`;
+  public getAllItems(page: number, size: number, sort: string, filters?: string): Observable<Item[]> {
+    let urlEndPoint: string = `http://localhost:8080/store/items?page=${page}&size=${size}&sort=${sort}`;
+    if (filters) {
+      urlEndPoint += `&filter=${filters}`;
+    }
     return this.http.get<Item[]>(urlEndPoint);
   }
 
