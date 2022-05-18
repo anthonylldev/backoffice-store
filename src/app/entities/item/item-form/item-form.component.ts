@@ -17,7 +17,8 @@ export class ItemFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     const entryParam: string = this.route.snapshot.paramMap.get("itemId") ?? "new";
@@ -34,8 +35,12 @@ export class ItemFormComponent implements OnInit {
 
   private getItemById(itemId: number) {
     this.itemService.getItemById(itemId).subscribe({
-      next: (itemRequest) => { this.item = itemRequest; },
-      error: (err) => { this.handleError(err); }
+      next: (itemRequest) => {
+        this.item = itemRequest;
+      },
+      error: (err) => {
+        this.handleError(err);
+      }
     })
   }
 
@@ -46,4 +51,40 @@ export class ItemFormComponent implements OnInit {
   private initializeItem() {
     this.item = new Item(undefined, "", 0);
   }
+
+  saveItem(): void {
+    switch (this.mode) {
+      case FormMode.NEW:
+        this.insertItem();
+        break;
+
+      case FormMode.UPDATE:
+        this.updateItem();
+        break;
+    }
+  }
+
+  private insertItem(): void {
+    this.itemService.insertItem(this.item!).subscribe({
+      next: (itemInserted) => {
+        alert(`Articulo: ${itemInserted.id}/${itemInserted.name} se ha insertado.`);
+      },
+      error: (err) => {
+        this.handleError(err)
+      }
+    });
+  }
+
+
+  private updateItem(): void {
+    this.itemService.updateItem(this.item!).subscribe({
+      next: (itemUpdated) => {
+        alert(`Articulo: ${itemUpdated.id}/${itemUpdated.name} se ha actualizado.`);
+      },
+      error: (err) => {
+        this.handleError(err)
+      }
+    });
+  }
 }
+

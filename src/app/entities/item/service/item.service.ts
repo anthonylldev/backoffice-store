@@ -28,4 +28,14 @@ export class ItemService {
     const urlEndPoint: string = `http://localhost:8080/store/items/${itemId}`
     return this.http.get<Item>(urlEndPoint);
   }
+
+  public insertItem(item: Item): Observable<Item> {
+    const urlEndPoint: string = `http://localhost:8080/store/items`
+    return this.http.post<Item>(urlEndPoint, item);
+  }
+
+  public updateItem(item: Item): Observable<Item> {
+    const urlEndPoint: string = `http://localhost:8080/store/items`
+    return this.http.patch<Item>(urlEndPoint, item);
+  }
 }
