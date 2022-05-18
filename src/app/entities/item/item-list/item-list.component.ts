@@ -34,11 +34,10 @@ export class ItemListComponent implements OnInit {
     if (this.route.snapshot.paramMap.get("categoryId")) {
       this.categoryId = +this.route.snapshot.paramMap.get("categoryId")!;
       this.title = "Artículos de la categoría " + this.categoryId;
-      this.getAllItemsByCategoryId(this.categoryId);
     } else {
       this.title = "Lista de artículos"
-      this.getAllItems();
     }
+    this.getAllItems();
   }
 
   private getAllItems(): void {
@@ -53,13 +52,6 @@ export class ItemListComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements
       },
-      error: (err) => { this.handleError(err) }
-    })
-  }
-
-  private getAllItemsByCategoryId(categoryId: number): void {
-    this.itemService.getAllItemsByCategoryId(categoryId).subscribe({
-      next: (itemRequest) => { this.items = itemRequest },
       error: (err) => { this.handleError(err) }
     })
   }
@@ -88,6 +80,10 @@ export class ItemListComponent implements OnInit {
 
   private buildFilters(): string | undefined {
     const filters: string[] = [];
+
+    if (this.categoryId) {
+      filters.push("category.id:EQUAL:" + this.categoryId)
+    }
 
     if (this.nameFilter) {
       filters.push("name:MATCH:" + this.nameFilter);
