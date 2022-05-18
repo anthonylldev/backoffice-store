@@ -1,7 +1,43 @@
-<h1>Ficha de artículo</h1>
-{{ mode }}
-{{ itemId }}
 
-<pre>
-  {{ item | json }}
-</pre>
+
+
+<div class="container mt-1">
+
+  <h1>{{ mode | titlecase }} artículo </h1>
+  <form *ngIf="item" #itemForm="ngForm" name="itemForm" role="form" novalidate autocomplete="off">
+    <div class="input-group mb-3">
+      <span class="input-group-text label">Id</span>
+      <input disabled type="number" [(ngModel)]="item.id" name="id" id="id" #id="ngModel" class="form-control">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text label">Categoría</span>
+      <input type="number" [(ngModel)]="item.categoryId" name="categoryId" id="categoryId" #categoryId="ngModel" class="form-control">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text label">Nombre</span>
+      <input type="text" [(ngModel)]="item.name" name="name" id="name" #name="ngModel" class="form-control">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text label">Precio</span>
+      <input type="number" [(ngModel)]="item.price" name="price" id="price" #price="ngModel" class="form-control">
+      <span class="input-group-text">€</span>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text label">Descripción</span>
+      <input type="text" [(ngModel)]="item.description" name="description" id="description" #description="ngModel" class="form-control">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text label">Imagen</span>
+      <input type="text" [(ngModel)]="item.image" name="image" id="image" #image="ngModel" class="form-control">
+    </div>
+
+    <div class="buttonsForm">
+      <button class="btn btn-primary btn-dark">Guardar</button>
+    </div>
+  </form>
+</div>
