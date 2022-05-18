@@ -1,6 +1,3 @@
-
-
-
 <div class="container mt-1">
 
   <h1>{{ mode | titlecase }} artículo </h1>
@@ -11,25 +8,37 @@
     </div>
 
     <div class="input-group mb-3">
-      <span class="input-group-text label">Categoría</span>
-      <input type="number" [(ngModel)]="item.categoryId" name="categoryId" id="categoryId" #categoryId="ngModel" class="form-control" required>
-      <span *ngIf="categoryId.dirty && categoryId.errors" class="input-group-text border-danger bg-danger text-light">
-        <small *ngIf="categoryId.errors['required']" class="">Este campo es requerido</small>
+      <span class="input-group-text label">Categorías</span>
+      <p-autoComplete [(ngModel)]="selectedCategory"
+                      [suggestions]="categories"
+                      (completeMethod)="getAllCategories($event)"
+                      field="name" name="selectedCategory"
+                      (onSelect)="categorySelected()"
+                      (onClear)="categoryCleaned()"
+                      [required]="true"
+                      [forceSelection]="true"
+                      #category="ngModel">
+      </p-autoComplete>
+      <span *ngIf="category.dirty && category.errors" class="input-group-text border-danger bg-danger text-light">
+        <small >Este campo es requerido</small>
       </span>
     </div>
 
     <div class="input-group mb-3">
       <span class="input-group-text label">Nombre</span>
-      <input type="text" [(ngModel)]="item.name" name="name" id="name" #name="ngModel" class="form-control" required minlength="3" maxlength="100">
+      <input type="text" [(ngModel)]="item.name" name="name" id="name" #name="ngModel" class="form-control" required
+             minlength="3" maxlength="100">
       <span *ngIf="name.dirty && name.errors" class="input-group-text border-danger bg-danger text-light">
         <small *ngIf="name.errors['required']" class="">Este campo es requerido</small>
-        <small *ngIf="name.errors['minlength']" class="">Este campo debe tener una longitud mínima de 3 caracteres</small>
+        <small *ngIf="name.errors['minlength']"
+               class="">Este campo debe tener una longitud mínima de 3 caracteres</small>
       </span>
     </div>
 
     <div class="input-group mb-3">
       <span class="input-group-text label">Precio</span>
-      <input type="number" [(ngModel)]="item.price" name="price" id="price" #price="ngModel" class="form-control" required min="1">
+      <input type="number" [(ngModel)]="item.price" name="price" id="price" #price="ngModel" class="form-control"
+             required min="1">
       <span class="input-group-text">€</span>
       <span *ngIf="price.dirty && price.errors" class="input-group-text border-danger bg-danger text-light">
         <small *ngIf="price.errors['required']" class="">Este campo es requerido</small>
@@ -39,7 +48,8 @@
 
     <div class="input-group mb-3">
       <span class="input-group-text label">Descripción</span>
-      <input type="text" [(ngModel)]="item.description" name="description" id="description" #description="ngModel" class="form-control" maxlength="2000">
+      <input type="text" [(ngModel)]="item.description" name="description" id="description" #description="ngModel"
+             class="form-control" maxlength="2000">
     </div>
 
     <div class="input-group mb-3">

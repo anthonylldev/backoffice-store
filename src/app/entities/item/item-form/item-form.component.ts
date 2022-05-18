@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {FormMode} from "../model/form-mode.enum";
 import {ItemService} from "../service/item.service";
 import {Item} from "../model/item.model";
+import {Category} from "../../category/model/category.model";
+import {CategoryService} from "../../category/service/category.service";
 
 @Component({
   selector: 'app-item-form',
@@ -14,9 +16,13 @@ export class ItemFormComponent implements OnInit {
   mode: FormMode = FormMode.NEW;
   item?: Item;
 
+  selectedCategory?: Category;
+  categories: Category[] = [];
+
   constructor(
     private route: ActivatedRoute,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private categoryService: CategoryService
   ) {
   }
 
@@ -37,6 +43,7 @@ export class ItemFormComponent implements OnInit {
     this.itemService.getItemById(itemId).subscribe({
       next: (itemRequest) => {
         this.item = itemRequest;
+        this.selectedCategory = new Category(itemRequest.categoryId!, itemRequest.categoryName!);
       },
       error: (err) => {
         this.handleError(err);
@@ -85,6 +92,33 @@ export class ItemFormComponent implements OnInit {
         this.handleError(err)
       }
     });
+  }
+
+  getAllCategories(event?: any): void {
+    let categorySearch: string | undefined;
+
+    if (event.query) {
+      categorySearch = event.query;
+    }
+
+    this.categoryService.getAllCategories(categorySearch).subscribe({
+      next: (categoriesFiltered) => {
+        this.categories = categoriesFiltered;
+      },
+      error: (err) => {
+        this.handleError(err);
+      }
+    })
+  }
+
+  categorySelected(): void {
+    this.item!.categoryId = this.selectedCategory!.id;
+    this.item!.categoryName = this.selectedCategory!.name;
+  }
+
+  categoryCleaned() {
+    this.item!.categoryId = undefined;
+    this.item!.categoryName = undefined;
   }
 }
 
